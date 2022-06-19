@@ -11,33 +11,21 @@ Load required libraries
 library(dplyr)
 library(data.table)
 ```
-Download zip file and extract
-  - Check if data directory exist,if not create one
-  - Assign url and filepath
-  - Check if file is downloaded, if not download it
-  - unzip
-```
-if(!file.exists("./data")){dir.create("./data")}
-url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-f <- file.path("./data", "har.zip")
-if(!file.exists("./data/UCI HAR Dataset")){download.file(url, f)}
-if(!file.exists("./data/UCI HAR Dataset")){unzip(f, exdir = "./data")}
-```
 Read files and assign column names
   - read feature.txt which contains the names of variables and make them unique
   - read activity_labels.txt and name columns
   - read subject and label files and name columns
   - read data files for train and test and assign column names using the unique features
  ```
-features <- fread("./data/UCI HAR Dataset/features.txt", col.names = c("index","featureName"))
+features <- fread("./UCI HAR Dataset/features.txt", col.names = c("index","featureName"))
 uniqueFeatures <- make.unique(features$featureName, sep="_")
-activityLabels <- fread("./data/UCI HAR Dataset/activity_labels.txt", col.names = c("index","activityLabel"))
-testData <- fread("./data/UCI HAR Dataset/test/X_test.txt", col.names = uniqueFeatures)
-testLabel <- fread("./data/UCI HAR Dataset/test/y_test.txt", col.names = "activity")
-testSubject <- fread("./data/UCI HAR Dataset/test/subject_test.txt", col.names = "subject")
-trainData <- fread("./data/UCI HAR Dataset/train/X_train.txt", col.names = uniqueFeatures)
-trainLabel <- fread("./data/UCI HAR Dataset/train/y_train.txt", col.names = "activity")
-trainSubject <- fread("./data/UCI HAR Dataset/train/subject_train.txt", col.names = "subject")
+activityLabels <- fread("./UCI HAR Dataset/activity_labels.txt", col.names = c("index","activityLabel"))
+testData <- fread("./UCI HAR Dataset/test/X_test.txt", col.names = uniqueFeatures)
+testLabel <- fread("./UCI HAR Dataset/test/y_test.txt", col.names = "activity")
+testSubject <- fread("./UCI HAR Dataset/test/subject_test.txt", col.names = "subject")
+trainData <- fread("./UCI HAR Dataset/train/X_train.txt", col.names = uniqueFeatures)
+trainLabel <- fread("./UCI HAR Dataset/train/y_train.txt", col.names = "activity")
+trainSubject <- fread("./UCI HAR Dataset/train/subject_train.txt", col.names = "subject")
 ```
 
 ### 1. Merges the training and the test sets to create one data set.
